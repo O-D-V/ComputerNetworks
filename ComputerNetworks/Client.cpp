@@ -1,4 +1,4 @@
-﻿#define WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
 
 
 #include <windows.h>
@@ -14,15 +14,13 @@
 #pragma comment (lib, "AdvApi32.lib")
 
 
-#define DEFAULT_BUFLEN 512 //размер буфера куда скидываем данные из сокета
-#define DEFAULT_PORT "80"//можно сюда было 80 поставить без функции где pmk.tversu.ru 27015
+#define DEFAULT_BUFLEN 512
+#define DEFAULT_PORT "27015"//����� ���� ���� 80 ��������� ��� ������� ��� pmk.tversu.ru
 
-//using namespace std;
+using namespace std;
 
 int __cdecl main(int argc, char** argv)
 {
-    std::printf("");
-    printf("");
     SetConsoleOutputCP(CP_UTF8);
     WSADATA wsaData;
     SOCKET ConnectSocket = INVALID_SOCKET;
@@ -30,18 +28,6 @@ int __cdecl main(int argc, char** argv)
         * ptr = NULL,
         hints;
     const char* sendbuf = "GET / HTTP/1.1\r\nAccept: text / html, application / xhtml + xml, application / xml; q = 0.9, image / avif, image / webp, image / apng, */*;q=0.8,application/signed-exchange;v=b3;q=0.7\r\nAccept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7\r\nCache-Control: max-age=0\r\nConnection: keep-alive\r\nHost: pmk.tversu.ru\r\nReferer: https://www.google.com/\r\nUpgrade-Insecure-Requests: 1\r\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36\r\n\r\n";
-//    const char* sendbuf = "GET / HTTP/1.1 \r\n";
-//"Accept: text / html, application / xhtml + xml, application / xml; q = 0.9, image / avif, image / webp, image / apng, */*;q=0.8,application/signed-exchange;v=b3;q=0.7\r\n"
-//"Accept-Encoding: gzip, deflate\r\n"
-//"Accept - Language: ru - RU, ru; q = 0.9, en - US; q = 0.8, en; q = 0.7\r\n"
-//"Cache - Control: max - age = 0\r\n"
-//"Connection: keep - alive\r\n"
-//"Host: pmk.tversu.ru\r\n"
-//"Referer: https://www.google.com/\r\n"
-//"Upgrade - Insecure - Requests: 1\r\n"
-//"User - Agent: Mozilla / 5.0 (Windows NT 10.0; Win64; x64) AppleWebKit / 537.36 (KHTML, like Gecko) Chrome / 119.0.0.0 Safari / 537.36 OPR / 105.0.0.0 (Edition Yx 05)\r\n\r\n";
-
-    
     char recvbuf[DEFAULT_BUFLEN];
     int iResult;
     int recvbuflen = DEFAULT_BUFLEN;
@@ -61,7 +47,7 @@ int __cdecl main(int argc, char** argv)
     hints.ai_protocol = IPPROTO_TCP;
 
     // Resolve the server address and port
-    iResult = getaddrinfo("pmk.tversu.ru", DEFAULT_PORT, &hints, &result);
+    iResult = getaddrinfo("127.0.0.1", DEFAULT_PORT, &hints, &result);
     if (iResult != 0) {
         printf("getaddrinfo failed with error: %d\n", iResult);
         WSACleanup();
